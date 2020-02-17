@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %} <!--相当于把base.html拉过来显示在此页，本页就没有html常见的开头那些代码-->
+{%  load blog_tags %}
 {% block title %}{{ post.title }}{% endblock %} <!--在base.html里面的block title位置填充post.title-->
 {% block content %} <!--在base.html里面的block content位置填充下面代码内容-->
     <h2><a href="http://222.25.2.37:8000/admin/blog/post/add/">发表新帖子</a></h2>
@@ -7,7 +8,7 @@
     <p class="date">
         Published {{ post.publish }} by {{ post.author }}
     </p>
-    {{ post.body|linebreaks }}
+    {{ post.body|markdown }}
     <p>
         <a href="{% url "blog:post_share" post.id %}">
             Share this post

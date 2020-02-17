@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}  <!--相当于把base.html拉过来显示在此页，本页就没有html常见的开头那些代码-->
-
+{% load blog_tags %}
 {% block title %}My Blog{% endblock %}  <!--在base.html里面的block title位置填充My Blog-->
 {% block content %}  <!--在base.html里面的block content位置填充下面代码内容-->
     <h1>VVV My Blog VVV</h1>
@@ -26,7 +26,7 @@
         <p class="date">
             Published {{ post.publish }} by {{ post.author }}
         </p>
-        {{ post.body|truncatewords:100|linebreaks }}
+        {{ post.body|markdown|truncatewords_html:30 }}
     {% endfor %}
     {% include "pagination.html" with page=posts %}
 {% endblock %}
